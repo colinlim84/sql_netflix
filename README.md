@@ -1,4 +1,4 @@
-# Case Study #1: Netflix : Most Critically Acclaimed Genre
+# Case Study #2: Netflix : Most Critically Acclaimed Genre
 
 ## 📚 Table of Contents
 - [Business Task](#business-task)
