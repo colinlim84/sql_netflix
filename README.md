@@ -11,12 +11,12 @@ All information regarding this case has been sourced from [here](https://platfor
 ***
 
 ## Business Task
-Find the genre of the person with the most number of oscar winnings.
-If there are more than one person with the same number of oscar wins, return the first one in alphabetic order based on their name. Use the names as keys when joining the tables.
+Find the genre of with the most number of oscar winnings.
+If there are more than one genre with the same number of oscar wins, return the first one in alphabetic order. Use the names as keys when joining the tables.
 ***
 
 ## Entity Relationship Diagram
-![image](https://github.com/colinlim84/StrataScratch/blob/main/LinkedIn_ERD.png)
+![image](https://github.com/colinlim84/sql_netflix/blob/main/Netflix_ERD.png)
 
 ***
 
@@ -25,58 +25,39 @@ If there are more than one person with the same number of oscar wins, return the
 ### Breakdown the task
 
 #### Request
-1. Compute duration of each project
-2. SUM expense of individual project
-3. Get prorates_expense via (project_expense*project_duration) [rounded to next dollar amount]
-4. Keep only prorates_expense > budget
+1. Find number of Oscar won for each genre
+2. Get the max number of Oscar count
 
 #### What's needed?
-1. Project Title
-2. Budget
-3. Prorates_expense
+1. Genre
 
 #### Any specific order?
-NA
+1. If there was a tie, return all result in alphabetical order
 
 ### Solution
 ````sql
-
--- 1. Compute duration of each project
-with project as (
+-- 1. Find number of Oscar won for each genre
+WITH winning_cnt AS (
 SELECT 
-    id, 
-    title, 
-    budget, 
-    DATEDIFF(end_date, start_date) as project_length
-FROM linkedin_projects),
+    i.top_genre,
+    COUNT(*) as winning_cnt
+FROM oscar_nominees n
+LEFT JOIN nominee_information i
+ON n.nominee=i.name
+WHERE winner=TRUE
+    AND top_genre IS NOT NULL
+GROUP BY 1)
 
---2. SUM expense of individual project
-expense as (
-SELECT 
-    project_id, SUM(salary) as expense
-FROM linkedin_emp_projects a
-LEFT JOIN linkedin_employees b
-ON a.emp_id=b.id
-GROUP BY project_id)
-
-SELECT 
-    title, 
-    budget, 
-    CEILING(expense/365*project_length) as prorates_expense --3. Get prorates_expense via (project_expense*project_duration) [rounded to next dollar amount]
-FROM project p
-LEFT JOIN expense e
-ON p.id=e.project_id
-WHERE CEILING(expense/365*project_length)>budget --4. Keep only prorates_expense > budget
+SELECT top_genre
+FROM winning_cnt
+WHERE winning_cnt=(SELECT MAX(winning_cnt) FROM winning_cnt) --2. Get the max number of Oscar count
+ORDER BY 1
 
 ````
 
 
 
 ### Output:
-| title | budget | proprates_expense |
-| ----------- | ----------- | ----------- |
-| Project6 | 41,611 | 63,230 |
-| Project9 | 32,341 | 44,691 |
-| Project11 | 11,705 | 31,606 |
-| Project21 | 24,330 | 57,310 |
-| Project22 | 18,590 | 20,090 |
+| title | 
+| ----------- | 
+| Drama | 
