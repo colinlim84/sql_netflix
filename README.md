@@ -20,6 +20,29 @@ If there are more than one genre with the same number of oscar wins, return the 
 
 ***
 
+## Table Preview
+
+**oscar_nominees**
+
+| year | category                     | nominee           | movie            | winner | id   |
+| ---- | ---------------------------- | ----------------- | ---------------- | ------ | ---- |
+| 2010 | actor in a leading role      | James Franco      | 127 Hours        | FALSE  | 648  |
+| 2003 | actor in a supporting role   | Benicio Del Toro  | 21 Grams         | FALSE  | 139  |
+| 2003 | actress in a leading role    | Naomi Watts       | 21 Grams         | FALSE  | 1119 |
+| 2001 | actress in a supporting role | Jennifer Connelly | A Beautiful Mind | TRUE   | 710  |
+| 2001 | actor in a leading role      | Russell Crowe     | A Beautiful Mind | FALSE  | 1315 |
+
+**nominee_information**
+
+| name            | amg_person_id | top_genre | birthday | id  |
+| --------------- | ------------- | --------- | -------- | --- |
+| Ruby Dee        | P 18243       | Drama     | 27/10/24 | 234 |
+| Hal Holbrook    | P 32790       | Drama     | 17/2/25  | 241 |
+| Cloris Leachman | P 41211       | Comedy    | 30/4/26  | 257 |
+| Rosemary Harris | P 30676       | Drama     | 19/9/30  | 301 |
+| Martin Landau   | P 40247       | Spy Film  | 20/6/31  | 312 |
+
+***
 ## Question and Solution
 
 ### Breakdown the task
